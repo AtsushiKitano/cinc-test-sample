@@ -1,7 +1,8 @@
 steps:
   - id: "make logs"
     name: 'gcr.io/cloud-builders/gcloud'
-    args: ['config', 'get-value', 'core/project' , '>sample.txt']
+    entrypoint: "/bin/sh"
+    args: ['./files/get_project_info.sh']
 
   - id: "testing stg environment"
     name: 'cincproject/auditor'
