@@ -6,7 +6,7 @@ steps:
 
   - id: "testing stg environment"
     name: 'cincproject/auditor'
-    args: ["exec", '$_FILE_PATH' , "-t", "gcp://", "--input-file", '$_FILE_PATH/files/attributes_stg.yaml']
+    args: ["exec", '../controls/sample.rb' ]
 
 timeout: 3600s
 substitutions:
