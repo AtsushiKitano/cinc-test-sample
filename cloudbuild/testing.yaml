@@ -6,7 +6,7 @@ steps:
 
   - id: "testing stg environment"
     name: 'cincproject/auditor'
-    args: ["exec", '../controls/sample.rb' ]
+    args: ["exec", './controls/sample.rb' ]
 
 timeout: 3600s
 substitutions:
