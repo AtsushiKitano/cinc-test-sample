@@ -5,7 +5,7 @@ steps:
     args: ['./files/get_project_info.sh']
 
   - id: "file dir"
-    name: 'ubntu'
+    name: 'ubuntu'
     args: ["ls" ]
 
   - id: "testing stg environment"
