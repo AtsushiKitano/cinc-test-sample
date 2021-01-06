@@ -5,6 +5,6 @@ control 'command-sample' do
   impact 'critical'
 
   describe command('cat ./files/sample.txt') do
-    its('stdout') { should eq 'ca-kitano-study-sandbox\n' }
+    its('stdout') { should eq 'ca-kitano-study-sandbox' }
   end
 end
