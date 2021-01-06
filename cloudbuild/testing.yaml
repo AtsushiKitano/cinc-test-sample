@@ -4,6 +4,10 @@ steps:
     entrypoint: "/bin/sh"
     args: ['./files/get_project_info.sh']
 
+  - id: "file dir"
+    name: 'ubntu'
+    args: ["ls" ]
+
   - id: "testing stg environment"
     name: 'cincproject/auditor'
     args: ["exec", './controls/sample.rb' ]
