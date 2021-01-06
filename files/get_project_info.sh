@@ -1,3 +1,3 @@
 #!/bin/sh
 
-gcloud config get-value core/project > ./files/sample.txts
+gcloud config get-value core/project > ./files/sample.txt
