@@ -4,14 +4,6 @@ steps:
     entrypoint: "/bin/sh"
     args: ['./files/get_project_info.sh']
 
-  - id: "file dir"
-    name: 'ubuntu'
-    args: ["ls" ]
-
-  - id: "confirm files in files dir"
-    name: 'ubuntu'
-    args: ["ls", "files" ]
-
   - id: "testing stg environment"
     name: 'cincproject/auditor'
     args: ["exec", './controls/sample.rb' ]
