@@ -1,0 +1,12 @@
+steps:
+  - id: "make logs"
+    name: 'gcr.io/cloud-builders/gcloud'
+    args: ['config', 'get-value', 'core/project' , '>', '../files/sample.txt']
+
+  - id: "testing stg environment"
+    name: 'cincproject/auditor'
+    args: ["exec", '$_FILE_PATH' , "-t", "gcp://", "--input-file", '$_FILE_PATH/files/attributes_stg.yaml']
+
+timeout: 3600s
+substitutions:
+  _FILE_PATH: ".."
