@@ -4,9 +4,9 @@ steps:
     entrypoint: "/bin/sh"
     args: ['./files/get_project_info.sh']
 
-  - id: "testing stg environment"
+  - id: "inspec exec"
     name: 'cincproject/auditor'
-    args: ["exec", './controls/sample.rb' ]
+    args: ["exec", '.' , "-t", "gcp://"]
 
 timeout: 3600s
 substitutions:
