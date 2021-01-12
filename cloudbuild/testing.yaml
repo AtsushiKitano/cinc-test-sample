@@ -4,10 +4,13 @@ steps:
     entrypoint: "/bin/sh"
     args: ['./test/files/get_project_info.sh']
 
-
   - id: "inspec exec"
     name: 'cincproject/auditor'
     args: ["exec", './test/' , "-t", "gcp://"]
+        
+  - id: "inspec exec"
+    name: 'cincproject/auditor'
+    args: ["exec", './test/commands/sample.rb']
 
 timeout: 3600s
 substitutions:
