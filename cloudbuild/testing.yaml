@@ -4,6 +4,14 @@ steps:
     entrypoint: "/bin/sh"
     args: ['./test/files/get_project_info.sh']
 
+  - id: "file dir"
+    name: 'ubuntu'
+    args: ["ls" , "./test/no_gcp_lib"]
+
+  - id: "tree dir"
+    name: 'ubuntu'
+    args: ["tree" , "./test/no_gcp_lib"]
+
   - id: "inspec exec"
     name: 'cincproject/auditor'
     args: ["exec", './test/' , "-t", "gcp://"]
