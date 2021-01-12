@@ -4,9 +4,6 @@ steps:
     entrypoint: "/bin/sh"
     args: ['./test/files/get_project_info.sh']
 
-  - id: "check file"
-    name: "ubuntu"
-    args: ["ls", "test", "files"]
 
   - id: "inspec exec"
     name: 'cincproject/auditor'
