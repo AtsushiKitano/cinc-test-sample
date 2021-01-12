@@ -6,7 +6,7 @@ steps:
 
   - id: "inspec exec"
     name: 'cincproject/auditor'
-    args: ["exec", '../' , "-t", "gcp://"]
+    args: ["exec", './test/' , "-t", "gcp://"]
 
 timeout: 3600s
 substitutions:
