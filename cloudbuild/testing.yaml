@@ -6,7 +6,7 @@ steps:
 
   - id: "inspec exec"
     name: 'cincproject/auditor'
-    args: ["exec", './test/' , "-t", "gcp://", "-t", "local://"]
+    args: ["exec", './test/' , "-t", "gcp://"]
         
   - id: "inspec exec commands"
     name: 'cincproject/auditor'
