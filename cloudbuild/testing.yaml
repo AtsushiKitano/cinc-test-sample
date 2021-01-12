@@ -8,7 +8,7 @@ steps:
     name: 'cincproject/auditor'
     args: ["exec", './test/' , "-t", "gcp://"]
         
-  - id: "inspec exec"
+  - id: "inspec exec commands"
     name: 'cincproject/auditor'
     args: ["exec", './test/commands/sample.rb']
 
