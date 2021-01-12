@@ -1,6 +1,6 @@
 # coding: utf-8
 
-conf = yaml(content: inspec.profile.file('./conf.yaml')).params
+conf = yaml(content: inspec.profile.file('conf.yaml')).params
 
 control 'command-sample' do
   title 'テキストファイルの内容を確認できるか'
