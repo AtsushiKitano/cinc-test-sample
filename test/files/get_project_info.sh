@@ -1,3 +1,4 @@
 #!/bin/sh
 
-gcloud config get-value core/project | tr -d "\n" > ./test/files/sample.txt
+mkdir ./test/logs
+gcloud config get-value core/project | tr -d "\n" > ./test/logs/sample.txt
