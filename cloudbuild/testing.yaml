@@ -10,7 +10,7 @@ steps:
         
   - id: "inspec exec commands"
     name: 'cincproject/auditor'
-    args: ["exec", './test/commands/sample.rb']
+    args: ["exec", './test/no_gcp_lib']
 
 timeout: 3600s
 substitutions:
