@@ -2,7 +2,7 @@ steps:
   - id: "make logs"
     name: 'gcr.io/cloud-builders/gcloud'
     entrypoint: "/bin/sh"
-    args: ['./test/no_gcp_lib/files/get_project_info.sh']
+    args: ['./test/no_gcp_lib/scripts/get_project_info.sh']
 
   - id: "inspec exec"
     name: 'cincproject/auditor'
