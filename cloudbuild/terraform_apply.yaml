@@ -15,5 +15,18 @@ steps:
     name: 'hashicorp/terraform'
     args: ["apply", "--auto-approve"]
 
+  - id: "make logs"
+    name: 'gcr.io/cloud-builders/gcloud'
+    entrypoint: "/bin/sh"
+    args: ['./test/no_gcp_lib/scripts/get_project_info.sh']
+
+  - id: "inspec exec"
+    name: 'cincproject/auditor'
+    args: ["exec", './test/' , "-t", "gcp://"]
+        
+  - id: "inspec exec commands"
+    name: 'cincproject/auditor'
+    args: ["exec", './test/no_gcp_lib']
+
 timeout: 3600s
 
