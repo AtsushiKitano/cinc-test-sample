@@ -1,0 +1,31 @@
+steps:
+  - id: 'terraform init'
+    name: 'hashicorp/terraform'
+    args: ["init"]
+
+  - id: 'terraform worspace select'
+    name: 'hashicorp/terraform'
+    args: ["workspace", "select", "$PROJECT_ID"]
+
+  - id: 'terraform plan'
+    name: 'hashicorp/terraform'
+    args: ["plan"]
+
+  - id: 'terraform apply'
+    name: 'hashicorp/terraform'
+    args: ["apply", "--auto-approve"]
+
+  - id: "make logs"
+    name: 'gcr.io/cloud-builders/gcloud'
+    entrypoint: "/bin/sh"
+    args: ['./test/no_gcp_lib/scripts/get_project_info.sh']
+
+  - id: "inspec exec"
+    name: 'cincproject/auditor'
+    args: ["exec", './test/' , "-t", "gcp://"]
+        
+  - id: "inspec exec commands"
+    name: 'cincproject/auditor'
+    args: ["exec", './test/no_gcp_lib']
+
+timeout: 3600s

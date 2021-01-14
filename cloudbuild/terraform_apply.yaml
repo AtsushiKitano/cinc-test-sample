@@ -1,0 +1,19 @@
+steps:
+  - id: 'terraform init'
+    name: 'hashicorp/terraform'
+    args: ["init"]
+
+  - id: 'terraform worspace select'
+    name: 'hashicorp/terraform'
+    args: ["workspace", "select", "$PROJECT_ID"]
+
+  - id: 'terraform plan'
+    name: 'hashicorp/terraform'
+    args: ["plan"]
+
+  - id: 'terraform apply'
+    name: 'hashicorp/terraform'
+    args: ["apply", "--auto-approve"]
+
+timeout: 3600s
+
