@@ -1,0 +1,6 @@
+steps:
+  - id: "inspec exec"
+    name: 'cincproject/auditor'
+    args: ["exec", './test/' , "-t", "gcp://", "--input-file" ,"./test/attributes/attribute_dev.yaml"]
+        
+timeout: 3600s
