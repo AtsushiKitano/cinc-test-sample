@@ -22,7 +22,7 @@ steps:
 
   - id: "inspec exec"
     name: 'cincproject/auditor'
-    args: ["exec", './test/' , "-t", "gcp://"]
+    args: ["exec", './test/' , "-t", "gcp://", "--input-file" ,"./test/attributes/attribute_dev.yaml"]
         
   - id: "inspec exec commands"
     name: 'cincproject/auditor'
