@@ -1,0 +1,5 @@
+name: research
+subnetworks:
+  - name: research
+    cidr: 192.168.10.0/24
+    region: asia-northeast1
