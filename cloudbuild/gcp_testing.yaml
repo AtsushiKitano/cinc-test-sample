@@ -1,6 +1,7 @@
 steps:
   - id: "inspec exec"
     name: 'cincproject/auditor'
+    entrypoint: "/bin/bash"
     args:
       - |
         cinc-auditor exec ./test/ -t gcp:// --input-file ./test/attributes/attribute_dev.yaml | true
