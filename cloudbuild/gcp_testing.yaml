@@ -5,6 +5,6 @@ steps:
     args:
       - -ceux
       - |
-        cinc-auditor exec ./test/ -t gcp:// --input-file ./test/attributes/attribute_dev.yaml | true
+        cinc-auditor exec ./test/ -t gcp:// --input-file ./test/attributes/attribute_dev.yaml 2>&1 | tee
       
 timeout: 3600s
