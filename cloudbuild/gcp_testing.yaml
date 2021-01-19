@@ -3,6 +3,6 @@ steps:
     name: 'cincproject/auditor'
     args:
       - |
-        exec . -t gcp:// --input-file ./test/attributes/attribute_dev.yaml | true
+        cinc-auditor exec . -t gcp:// --input-file ./test/attributes/attribute_dev.yaml | true
         
 timeout: 3600s
