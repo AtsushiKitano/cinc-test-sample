@@ -1,8 +1,9 @@
 steps:
   - id: "inspec exec"
     name: 'cincproject/auditor'
-    entrypoint: "/bin/sh"
+    entrypoint: "/bin/bash"
     args:
+      - -ceux
       - |
         ls
       
