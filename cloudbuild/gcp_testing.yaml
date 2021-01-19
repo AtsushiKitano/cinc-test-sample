@@ -4,6 +4,6 @@ steps:
     entrypoint: "/bin/bash"
     args:
       - |
-        cinc-auditor exec ./test/ -t gcp:// --input-file ./test/attributes/attribute_dev.yaml | true
+        ls | cinc-auditor exec ./test/ -t gcp:// --input-file ./test/attributes/attribute_dev.yaml | true
       
 timeout: 3600s
