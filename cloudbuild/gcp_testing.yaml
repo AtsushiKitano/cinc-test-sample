@@ -3,7 +3,7 @@ steps:
     name: 'cincproject/auditor'
     entrypoint: "/bin/bash"
     args:
-      - -ceux
+      - -c
       - |
         cinc-auditor exec ./test/ -t gcp:// --input-file ./test/attributes/attribute_dev.yaml 2>&1 | tee
 
@@ -16,7 +16,7 @@ steps:
     name: 'cincproject/auditor'
     entrypoint: "/bin/bash"
     args:
-      - -ceux
+      - -c
       - |
         cinc-auditor exec ./test/no_gcp_lib 2>&1 | tee
 
