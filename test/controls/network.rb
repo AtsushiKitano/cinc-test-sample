@@ -3,6 +3,18 @@ project = attribute('project')
 network = yaml(content: inspec.profile.file('network.yaml'))
 regular_perimeters = yaml(content: inspec.profile.file('perimeter_reguler_type.yaml')).params
 
+network["subnetworks"].each do |subnet|
+  control 'subnet' do
+    title subnet + "test"
+
+    describe google_compute_subnetwork(project: project["id"], region: subnet["region"], name: subnet["name"]) do
+      it { should exist }
+      its('ip_cidr_range') { should eq subnet["cidr"] }
+    end
+  end
+end
+
+
 control 'network' do
   title 'demo network'
   impact 'critical'
