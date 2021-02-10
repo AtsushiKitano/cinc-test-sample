@@ -21,7 +21,7 @@ steps:
 
   - id: "make logs"
     name: 'gcr.io/cloud-builders/gcloud'
-    entrypoint: "/bin/sh"
+    entrypoint: "/bin/bash"
     args: ['./test/no_gcp_lib/scripts/get_project_info.sh']
 
   - id: "inspec exec commands"
