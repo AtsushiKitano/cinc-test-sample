@@ -34,11 +34,9 @@ steps:
     args: [ "echo", "$$SECRET"]
     secretEnv: ["SECRET"]
 
-
-  availableSecrets:
-    secretMAnager:
-      - versionNAme: project/$PROJECT_ID/secrets/secret-sample/versions/1
-        env: "SECRET"
-    
+availableSecrets:  
+  secretMAnager:
+    - versionNAme: project/$PROJECT_ID/secrets/secret-sample/versions/1
+      env: "SECRET"
 timeout: 3600s
 
