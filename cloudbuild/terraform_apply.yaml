@@ -17,8 +17,8 @@ steps:
 
   - id: "make logs"
     name: 'gcr.io/cloud-builders/gcloud'
-    entrypoint: "/bin/bash"
     args: ['./test/no_gcp_lib/scripts/get_project_info.sh']
+    entrypoint: "/bin/bash"
 
   - id: "inspec exec"
     name: 'cincproject/auditor'
@@ -28,5 +28,17 @@ steps:
     name: 'cincproject/auditor'
     args: ["exec", './test/no_gcp_lib']
 
+  - id: "secret get info"
+    name: "ubuntu"
+    entrypoint: "bash"
+    args: [ "echo", "$$SECRET"]
+    secretEnv: ["SECRET"]
+
+
+  availableSecrets:
+    secretMAnager:
+      - versionNAme: project/$PROJECT_ID/secrets/secret-sample/versions/1
+        env: "SECRET"
+    
 timeout: 3600s
 
