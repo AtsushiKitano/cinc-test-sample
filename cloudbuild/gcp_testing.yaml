@@ -20,4 +20,16 @@ steps:
       - |
         cinc-auditor exec ./test/no_gcp_lib 2>&1 | tee
 
+  - id: "secret get info"
+    name: "ubuntu"
+    entrypoint: "bash"
+    args: [ "echo", "$$SECRET"]
+    secretEnv: ["SECRET"]
+
+
+  availableSecrets:
+    secretMAnager:
+      - versionNAme: project/$PROJECT_ID/secrets/secret-sample/versions/1
+        env: "SECRET"
+
 timeout: 3600s
