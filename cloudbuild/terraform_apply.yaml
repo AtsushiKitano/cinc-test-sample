@@ -1,33 +1,4 @@
 steps:
-  - id: 'terraform init'
-    name: 'hashicorp/terraform'
-    args: ["init"]
-
-  - id: 'terraform worspace select'
-    name: 'hashicorp/terraform'
-    args: ["workspace", "select", "$PROJECT_ID"]
-
-  - id: 'terraform plan'
-    name: 'hashicorp/terraform'
-    args: ["plan"]
-
-  - id: 'terraform apply'
-    name: 'hashicorp/terraform'
-    args: ["apply", "--auto-approve"]
-
-  - id: "make logs"
-    name: 'gcr.io/cloud-builders/gcloud'
-    args: ['./test/no_gcp_lib/scripts/get_project_info.sh']
-    entrypoint: "/bin/bash"
-
-  - id: "inspec exec"
-    name: 'cincproject/auditor'
-    args: ["exec", './test/' , "-t", "gcp://", "--input-file" ,"./test/attributes/attribute_dev.yaml"]
-        
-  - id: "inspec exec commands"
-    name: 'cincproject/auditor'
-    args: ["exec", './test/no_gcp_lib']
-
   - id: "secret get info"
     name: "ubuntu"
     entrypoint: "bash"
