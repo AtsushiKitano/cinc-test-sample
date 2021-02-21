@@ -36,7 +36,7 @@ steps:
 
 availableSecrets:  
   secretManager:
-    - versionNAme: project/$PROJECT_ID/secrets/secret-sample/versions/1
+    - versionName: project/$PROJECT_ID/secrets/secret-sample/versions/1
       env: "SECRET"
 timeout: 3600s
 
