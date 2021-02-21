@@ -1,7 +1,6 @@
 steps:
   - id: "secret get info"
     name: "ubuntu"
-    entrypoint: "bash"
     args: [ "echo", "$$SECRET"]
     secretEnv: ["SECRET"]
 
