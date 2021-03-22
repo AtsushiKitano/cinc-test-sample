@@ -21,7 +21,7 @@ steps:
 
   - id: "get configs"
     name: 'gcr.io/cloud-builders/gcloud'
-    args: ['./scripts/main.sh','dev1']
+    args: ['./scripts/main.sh']
     entrypoint: 'bash'
     dir: 'no_lib_test'
 
