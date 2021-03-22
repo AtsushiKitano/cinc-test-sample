@@ -15,7 +15,7 @@ steps:
 
   - id: "inspec exec commands"
     name: 'cincproject/auditor'
-    args: ["exec", './test']
+    args: ["exec", './test', "-t", "gcp://"]
     env:
       - "TF_VAR_project=$PROJECT_ID"
 
