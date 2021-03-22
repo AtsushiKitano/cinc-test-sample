@@ -1,5 +1,15 @@
-name: research
-subnetworks:
-  - name: research
-    cidr: 192.168.10.0/24
-    region: asia-northeast1
+vpc:
+  name: "sample"
+subnetwork:
+  name: "sample"
+  region: "asia-northeast1"
+  cidr: "192.168.10.0/24"
+firewall:
+  name: "ingress-sample"
+  direction: "INGRESS"
+  source_address: "0.0.0.0"
+  priority: 1000
+  rule:
+    protocol: "tcp"
+    ports:
+      - "80"
