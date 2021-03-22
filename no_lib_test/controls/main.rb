@@ -11,43 +11,28 @@ control "network" do
   subnetwork_expected = network_expected_info["subnetwork"]
   firewall_expected = network_expected_info["firewall"]
 
-  vpc_actual = yaml(content: inspec.profile.file("vpc_actual.yaml")).params
-  subnetwork_actual = yaml(content: inspec.profile.file("subnetwork_actual.yaml")).params
-  firewall_actual = yaml(content: inspec.profile.file("firewall_actual.yaml")).params
+  vpc_actual = yaml(content: inspec.profile.file("vpc_actual.yaml"))
+  subnetwork_actual = yaml(content: inspec.profile.file("subnetwork_actual.yaml"))
+  firewall_actual = yaml(content: inspec.profile.file("firewall_actual.yaml"))
 
-  describe vpc_actual["name"] do
-    it { should cmp vpc_expected["name"] }
+  describe vpc_actual do
+    its(:name) { should cmp vpc_expected["name"] }
   end
 
-  describe subnetwork_actual["name"] do
-    it { should cmp subnetwork_expected["name"] }
+  describe subnetwork_actual do
+    its(:name) { should cmp subnetwork_expected["name"] }
+    its(:region) { should match subnetwork_expected["region"] }
+    its(:ipCidrRange) { should cmp subnetwork_expected["cidr"] }
   end
 
-  describe subnetwork_actual["region"] do
-    it { should match subnetwork_expected["region"] }
+  describe firewall_actual do
+    its(:name) { should cmp firewall_expected["name"] }
+    its(:direction) { should cmp firewall_expected["direction"]}
+    its(:priority) { should cmp firewall_expected["priority"] }
+    its(:sourceRanges) { should be_in firewall_expected["source_ranges"]}
   end
 
-  describe subnetwork_actual["ipCidrRange"] do
-    it { should cmp subnetwork_expected["cidr"] }
-  end
-
-  describe firewall_actual["name"] do
-    it { should cmp firewall_expected["name"] }
-  end
-
-  describe firewall_actual["direction"] do
-    it { should cmp firewall_expected["direction"]}
-  end
-
-  describe firewall_actual["priority"] do
-    it { should cmp firewall_expected["priority"] }
-  end
-
-  describe firewall_actual["sourceRanges"] do
-    it { should be_in firewall_expected["source_ranges"]}
-  end
-
-  firewall_actual["allowed"].each do |rule|
+  firewall_actual.allowed.each do |rule|
     describe rule["IPProtocol"] do
       it { should cmp firewall_expected["rule"]["protocol"] }
     end
@@ -65,47 +50,31 @@ control "gce" do
   instance_expected = gce_expected_info["instance"]
   disk_expected = gce_expected_info["disk"]
 
-  instance_actual = yaml(content: inspec.profile.file("instance_actual.yaml")).params
-  disk_actual = yaml(content: inspec.profile.file("disk_actual.yaml")).params
+  instance_actual = yaml(content: inspec.profile.file("instance_actual.yaml"))
+  disk_actual = yaml(content: inspec.profile.file("disk_actual.yaml"))
 
-  describe instance_actual["name"] do
-    it { should cmp instance_expected["name"] }
+  describe instance_actual do
+    its(:name) { should cmp instance_expected["name"] }
+    its(:zone) { should match instance_expected["zone"] }
+    its(:machineType) { should match instance_expected["machine_type"] }
   end
 
-  describe instance_actual["zone"] do
-    it { should match instance_expected["zone"] }
-  end
-
-  describe instance_actual["machineType"] do
-    it { should match instance_expected["machine_type"] }
-  end
-
-  instance_actual["networkInterfaces"].each do |nic|
+  instance_actual.networkInterfaces.each do |nic|
     describe nic["subnetwork"] do
       it { should match instance_expected["interface"]["subnetwork"] }
     end
   end
 
-  instance_actual["disks"].each do |disk|
+  instance_actual.disks.each do |disk|
     describe disk["source"] do
       it { should match instance_expected["disk_name"]}
     end
   end
 
-  describe disk_actual["name"] do
-    it { should cmp disk_expected["name"] }
+  describe disk_actual do
+    its(:name) { should cmp disk_expected["name"] }
+    its(:zone) { should match disk_expected["zone"] }
+    its(:sourceImage) { should match disk_expected["image"] }
+    its(:sizeGb) { should cmp disk_expected["size"]}
   end
-
-  describe disk_actual["zone"] do
-    it { should match disk_expected["zone"] }
-  end
-
-  describe disk_actual["sourceImage"] do
-    it { should match disk_expected["image"] }
-  end
-
-  describe disk_actual["sizeGb"] do
-    it { should cmp disk_expected["size"]}
-  end
-
 end
