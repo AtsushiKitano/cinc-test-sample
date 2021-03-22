@@ -25,13 +25,9 @@ steps:
     entrypoint: 'bash'
     dir: 'no_lib_test'
 
-  - id: "ls"
-    name: 'ubuntu'
-    args: ['ls', 'no_lib_test/files']
-
   - id: "testing gcp by no_lib"
     name: 'cincproject/auditor'
-    args: ["exec", './no_lib_test']
+    args: ["exec", './no_lib_test', '-t' , 'gcp://']
 
   - id: "terraform destroy"
     name: 'alpine/terragrunt'
