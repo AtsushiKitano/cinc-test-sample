@@ -1,7 +1,2 @@
 name: http-system
 title: "nginx web system sample system test"
-depends:
-  - name: inspec-gcp
-    url: https://github.com/inspec/inspec-gcp/archive/master.tar.gz
-supports:
-  - platform: gcp

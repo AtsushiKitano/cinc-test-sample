@@ -27,7 +27,7 @@ steps:
 
   - id: "testing gcp by no_lib"
     name: 'cincproject/auditor'
-    args: ["exec", './no_lib_test', "-t", "gcp://"]
+    args: ["exec", './no_lib_test']
 
   - id: "terraform destroy"
     name: 'alpine/terragrunt'
