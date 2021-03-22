@@ -1,0 +1,27 @@
+steps:
+  - id: "terraform plan"
+    name: 'alpine/terragrunt'
+    args: ['terragrunt', 'run-all', 'plan']
+    dir : './src/'
+    env:
+      - "TF_VAR_project=$PROJECT_ID"
+
+  - id: "terraform apply"
+    name: 'alpine/terragrunt'
+    args: ['terragrunt', 'run-all', 'apply', '--terragrunt-non-interactive']
+    dir : './src/'
+    env:
+      - "TF_VAR_project=$PROJECT_ID"
+
+  - id: "inspec exec commands"
+    name: 'cincproject/auditor'
+    args: ["exec", './test']
+    env:
+      - "TF_VAR_project=$PROJECT_ID"
+
+  - id: "terraform destroy"
+    name: 'alpine/terragrunt'
+    args: ['terragrunt', 'run-all', 'destroy', '--terragrunt-non-interactive']
+    dir : './src/'
+    env:
+      - "TF_VAR_project=$PROJECT_ID"
