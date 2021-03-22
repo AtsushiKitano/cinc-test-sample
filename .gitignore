@@ -1,2 +1,4 @@
 .terraform
-.DS*
+.DS_Store
+provider.tf
+terraform.tf
