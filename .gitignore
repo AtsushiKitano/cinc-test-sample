@@ -2,3 +2,4 @@
 .DS_Store
 provider.tf
 terraform.tf
+*_actual.yaml
