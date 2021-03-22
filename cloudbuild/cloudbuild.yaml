@@ -19,6 +19,16 @@ steps:
     env:
       - "TF_VAR_project=$PROJECT_ID"
 
+  - id: "get configs"
+    name: 'gcr.io/cloud-builders/gcloud'
+    args: ['./scripts/main.sh','dev1']
+    entrypoint: 'bash'
+    dir: 'no_lib_test'
+
+  - id: "testing gcp by no_lib"
+    name: 'cincproject/auditor'
+    args: ["exec", './no_lib_test', "-t", "gcp://"]
+
   - id: "terraform destroy"
     name: 'alpine/terragrunt'
     args: ['terragrunt', 'run-all', 'destroy', '--terragrunt-non-interactive']

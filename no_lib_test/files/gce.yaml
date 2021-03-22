@@ -1,0 +1,12 @@
+instance:
+  name: "sample"
+  disk_name: "sample"
+  zone: "asia-northeast1-b"
+  machine_type: "f1-micro"
+  interface:
+    subnetwork: "sample"
+disk:
+  name: "sample"
+  zone: "asia-northeast1-b"
+  image: "ubuntu-2004"
+  size: 20
