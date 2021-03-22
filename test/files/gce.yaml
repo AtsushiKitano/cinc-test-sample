@@ -7,5 +7,6 @@ instance:
     subnetwork: "sample"
 disk:
   name: "sample"
+  zone: "asia-northeast1-b"
   image: "ubuntu-2004"
   size: 20
