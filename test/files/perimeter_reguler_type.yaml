@@ -1,7 +1,0 @@
-- name: ticket1673
-  restricted_services:
-    - cloudfunctions.googleapis.com
-  access_levels:
-    - ticket1673
-  projects:
-    - log-export-test
