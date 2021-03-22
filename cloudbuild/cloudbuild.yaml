@@ -25,6 +25,11 @@ steps:
     entrypoint: 'bash'
     dir: 'no_lib_test'
 
+  - id: "ls"
+    name: 'ubuntu'
+    args: ['ls', 'no_lib_test', 'files']
+    entrypoint: 'bash'
+
   - id: "testing gcp by no_lib"
     name: 'cincproject/auditor'
     args: ["exec", './no_lib_test']
