@@ -1,4 +1,5 @@
 # coding: utf-8
+
 network_expected_info = yaml(content: inspec.profile.file("network.yaml")).params
 gce_expected_info = yaml(content: inspec.profile.file("gce.yaml")).params
 project_id = ENV["TF_VAR_project"]
@@ -14,6 +15,11 @@ control "network" do
   vpc_actual = yaml(content: inspec.profile.file("vpc_actual.yaml"))
   subnetwork_actual = yaml(content: inspec.profile.file("subnetwork_actual.yaml"))
   firewall_actual = yaml(content: inspec.profile.file("firewall_actual.yaml"))
+
+  firewall_actual.allowed.each do |rule|
+    p rule.class
+    p rule.inspect
+  end
 
   describe vpc_actual do
     its(:name) { should cmp vpc_expected["name"] }
@@ -33,12 +39,14 @@ control "network" do
   end
 
   firewall_actual.allowed.each do |rule|
-    describe rule["IPProtocol"] do
-      it { should cmp firewall_expected["rule"]["protocol"] }
-    end
+    describe "allowedRule" do
+      it 'プロトコルがtcpであること' do
+        expect(rule["IPProtocol"]).to eq firewall_expected["rule"]["protocol"]
+      end
 
-    describe rule["ports"] do
-      it { should be_in firewall_expected["rule"]["ports"] }
+      it '許可ポートが80であること' do
+        expect(rule["ports"]).to eq firewall_expected["rule"]["ports"]
+      end
     end
   end
 
@@ -60,14 +68,18 @@ control "gce" do
   end
 
   instance_actual.networkInterfaces.each do |nic|
-    describe nic["subnetwork"] do
-      it { should match instance_expected["interface"]["subnetwork"] }
+    describe "interfaces" do
+      it 'GCEのサブネットワークの所属がsampleであること' do
+        expect(nic["subnetwork"]).to match instance_expected["interface"]["subnetwork"]
+      end
     end
   end
 
   instance_actual.disks.each do |disk|
-    describe disk["source"] do
-      it { should match instance_expected["disk_name"]}
+    describe "disk" do
+      it 'GCEのディスク名がsampleであること' do
+        expect(disk["source"]).to match match instance_expected["disk_name"]
+      end
     end
   end
 
