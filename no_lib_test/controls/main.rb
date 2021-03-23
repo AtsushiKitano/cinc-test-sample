@@ -27,11 +27,11 @@ control "network" do
       expect(subnetwork_actual[:name]).to eq subnetwork_expected["name"]
     end
 
-    it 'サブネットワークのリージョンが東京リージョンであること' do
+    it 'リージョンが東京リージョンであること' do
       expect(subnetwork_actual[:region]).to match subnetwork_expected["region"]
     end
 
-    it 'サブネットワークのCIDRが192.168.10.0/24であること' do
+    it 'CIDRが192.168.10.0/24であること' do
       expect(subnetwork_actual[:ipCidrRange]).to eq subnetwork_expected["cidr"]
     end
   end
