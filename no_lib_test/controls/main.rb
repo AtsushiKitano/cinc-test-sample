@@ -16,11 +16,6 @@ control "network" do
   subnetwork_actual = yaml(content: inspec.profile.file("subnetwork_actual.yaml"))
   firewall_actual = yaml(content: inspec.profile.file("firewall_actual.yaml"))
 
-  firewall_actual.allowed.each do |rule|
-    p rule.class
-    p rule.inspect
-  end
-
   describe vpc_actual do
     its(:name) { should cmp vpc_expected["name"] }
   end
