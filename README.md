@@ -85,5 +85,5 @@ cinc-auditor exec . -t gcp://
 - 環境の削除方法
 
 ```
-terragrunt run-all apply --terragrunt-non-interactive
+terragrunt run-all destroy --terragrunt-non-interactive
 ```
