@@ -17,48 +17,48 @@ control "network" do
   firewall_actual = yaml(content: inspec.profile.file("firewall_actual.yaml"))
 
   describe "VPC" do
-    it 'VPC名がsampleであること' do
+    it "VPC名が #{vpc_expected["name"]} である" do
       expect(vpc_actual[:name]).to eq vpc_expected["name"]
     end
   end
 
   describe "subnetwork" do
-    it 'サブネットワーク名がsampleであること' do
+    it "サブネットワーク名が #{subnetwork_expected["name"]} である" do
       expect(subnetwork_actual[:name]).to eq subnetwork_expected["name"]
     end
 
-    it 'リージョンが東京リージョンであること' do
+    it "リージョンが #{subnetwork_expected["region"]} である" do
       expect(subnetwork_actual[:region]).to match subnetwork_expected["region"]
     end
 
-    it 'CIDRが192.168.10.0/24であること' do
+    it "CIDRが #{subnetwork_expected["cidr"]} であること" do
       expect(subnetwork_actual[:ipCidrRange]).to eq subnetwork_expected["cidr"]
     end
   end
 
   describe "firewall" do
-    it 'ファイアーフォール名がsample-ingressであること' do
+    it "ファイアーフォール名が #{firewall_expected["name"]} である" do
       expect(firewall_actual[:name]).to eq firewall_expected["name"]
     end
 
-    it '方向がINGRESSであること' do
+    it "方向が #{firewall_expected["direction"]} である" do
       expect(firewall_actual[:direction]).to eq firewall_expected["direction"]
     end
 
-    it 'プライオリティが1000であること' do
+    it "プライオリティが #{firewall_expected["priority"]} である" do
       expect(firewall_actual[:priority]).to eq firewall_expected["priority"]
     end
 
-    it 'source rangeが0.0.0.0/0であること' do
+    it "source rangeが #{firewall_expected["source_ranges"]} である" do
       expect(firewall_actual[:sourceRanges]).to eq firewall_expected["source_ranges"]
     end
 
     firewall_actual.allowed.each do |rule|
-      it 'プロトコルがtcpであること' do
+      it "プロトコルが #{firewall_expected["rule"]["protocol"]} である" do
         expect(rule["IPProtocol"]).to eq firewall_expected["rule"]["protocol"]
       end
 
-      it '許可ポートが80であること' do
+      it "許可ポートが #{firewall_expected["rule"]["ports"]} である" do
         expect(rule["ports"]).to eq firewall_expected["rule"]["ports"]
       end
     end
@@ -75,45 +75,45 @@ control "gce" do
   disk_actual = yaml(content: inspec.profile.file("disk_actual.yaml"))
 
   describe "GCE" do
-    it 'インスタンス名がsampleであること' do
+    it "インスタンス名が #{instance_expected["name"]} である" do
       expect(instance_actual[:name]).to eq instance_expected["name"]
     end
 
-    it 'zoneがasia-notheast1-bであること' do
+    it "zoneが #{instance_expected["zone"]} である" do
       expect(instance_actual[:zone]).to match instance_expected["zone"]
     end
 
-    it 'machinetypeはf1-micorであること' do
+    it "マシンタイプが #{instance_expected["machine_type"]} である" do
       expect(instance_actual[:machineType]).to match instance_expected["machine_type"]
     end
 
     instance_actual.networkInterfaces.each do |nic|
-      it 'サブネットワークの所属がsampleであること' do
+      it "サブネットワークの所属が #{instance_expected["interface"]["subnetwork"]} であること" do
         expect(nic["subnetwork"]).to match instance_expected["interface"]["subnetwork"]
       end
     end
 
     instance_actual.disks.each do |disk|
-      it 'ブートディスク名がsampleであること' do
+      it "ブートディスク名が#{instance_expected["disk_name"]}である" do
         expect(disk["source"]).to match match instance_expected["disk_name"]
       end
     end
   end
 
   describe "GCEDisk" do
-    it 'ディスク名がsampleであること' do
+    it "ディスク名が #{disk_expected["name"]} である" do
       expect(disk_actual[:name]).to eq disk_expected["name"]
     end
 
-    it 'ゾーンがasia-northeast1-bであること' do
+    it "ゾーンが #{disk_expected["zone"]} である" do
       expect(disk_actual[:zone]).to match disk_expected["zone"]
     end
 
-    it 'イメージがubuntu2004ltsであること' do
+    it "イメージが #{disk_expected["image"]} である" do
       expect(disk_actual[:sourceImage]).to match disk_expected["image"]
     end
 
-    it 'サイズが20GBであること' do
+    it "サイズが#{disk_expected["size"]}GBであること" do
       expect(disk_actual[:sizeGb]).to eq disk_expected["size"]
     end
   end
