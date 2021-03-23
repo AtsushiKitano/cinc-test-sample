@@ -9,4 +9,4 @@ disk:
   name: "sample"
   zone: "asia-northeast1-b"
   image: "ubuntu-2004"
-  size: 20
+  size: "20"

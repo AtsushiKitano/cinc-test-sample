@@ -16,25 +16,44 @@ control "network" do
   subnetwork_actual = yaml(content: inspec.profile.file("subnetwork_actual.yaml"))
   firewall_actual = yaml(content: inspec.profile.file("firewall_actual.yaml"))
 
-  describe vpc_actual do
-    its(:name) { should cmp vpc_expected["name"] }
+  describe "VPC" do
+    it 'VPC名がsampleであること' do
+      expect(vpc_actual[:name]).to eq vpc_expected["name"]
+    end
   end
 
-  describe subnetwork_actual do
-    its(:name) { should cmp subnetwork_expected["name"] }
-    its(:region) { should match subnetwork_expected["region"] }
-    its(:ipCidrRange) { should cmp subnetwork_expected["cidr"] }
+  describe "subnetwork" do
+    it 'サブネットワーク名がsampleであること' do
+      expect(subnetwork_actual[:name]).to eq subnetwork_expected["name"]
+    end
+
+    it 'サブネットワークのリージョンが東京リージョンであること' do
+      expect(subnetwork_actual[:region]).to match subnetwork_expected["region"]
+    end
+
+    it 'サブネットワークのCIDRが192.168.10.0/24であること' do
+      expect(subnetwork_actual[:ipCidrRange]).to eq subnetwork_expected["cidr"]
+    end
   end
 
-  describe firewall_actual do
-    its(:name) { should cmp firewall_expected["name"] }
-    its(:direction) { should cmp firewall_expected["direction"]}
-    its(:priority) { should cmp firewall_expected["priority"] }
-    its(:sourceRanges) { should be_in firewall_expected["source_ranges"]}
-  end
+  describe "firewall" do
+    it 'ファイアーフォール名がsample-ingressであること' do
+      expect(firewall_actual[:name]).to eq firewall_expected["name"]
+    end
 
-  firewall_actual.allowed.each do |rule|
-    describe "allowedRule" do
+    it '方向がINGRESSであること' do
+      expect(firewall_actual[:direction]).to eq firewall_expected["direction"]
+    end
+
+    it 'プライオリティが1000であること' do
+      expect(firewall_actual[:priority]).to eq firewall_expected["priority"]
+    end
+
+    it 'source rangeが0.0.0.0/0であること' do
+      expect(firewall_actual[:sourceRanges]).to eq firewall_expected["source_ranges"]
+    end
+
+    firewall_actual.allowed.each do |rule|
       it 'プロトコルがtcpであること' do
         expect(rule["IPProtocol"]).to eq firewall_expected["rule"]["protocol"]
       end
@@ -44,7 +63,6 @@ control "network" do
       end
     end
   end
-
 end
 
 control "gce" do
@@ -56,32 +74,47 @@ control "gce" do
   instance_actual = yaml(content: inspec.profile.file("instance_actual.yaml"))
   disk_actual = yaml(content: inspec.profile.file("disk_actual.yaml"))
 
-  describe instance_actual do
-    its(:name) { should cmp instance_expected["name"] }
-    its(:zone) { should match instance_expected["zone"] }
-    its(:machineType) { should match instance_expected["machine_type"] }
-  end
+  describe "GCE" do
+    it 'インスタンス名がsampleであること' do
+      expect(instance_actual[:name]).to eq instance_expected["name"]
+    end
 
-  instance_actual.networkInterfaces.each do |nic|
-    describe "interfaces" do
-      it 'GCEのサブネットワークの所属がsampleであること' do
+    it 'zoneがasia-notheast1-bであること' do
+      expect(instance_actual[:zone]).to match instance_expected["zone"]
+    end
+
+    it 'machinetypeはf1-micorであること' do
+      expect(instance_actual[:machineType]).to match instance_expected["machine_type"]
+    end
+
+    instance_actual.networkInterfaces.each do |nic|
+      it 'サブネットワークの所属がsampleであること' do
         expect(nic["subnetwork"]).to match instance_expected["interface"]["subnetwork"]
       end
     end
-  end
 
-  instance_actual.disks.each do |disk|
-    describe "disk" do
-      it 'GCEのディスク名がsampleであること' do
+    instance_actual.disks.each do |disk|
+      it 'ブートディスク名がsampleであること' do
         expect(disk["source"]).to match match instance_expected["disk_name"]
       end
     end
   end
 
-  describe disk_actual do
-    its(:name) { should cmp disk_expected["name"] }
-    its(:zone) { should match disk_expected["zone"] }
-    its(:sourceImage) { should match disk_expected["image"] }
-    its(:sizeGb) { should cmp disk_expected["size"]}
+  describe "GCEDisk" do
+    it 'ディスク名がsampleであること' do
+      expect(disk_actual[:name]).to eq disk_expected["name"]
+    end
+
+    it 'ゾーンがasia-northeast1-bであること' do
+      expect(disk_actual[:zone]).to match disk_expected["zone"]
+    end
+
+    it 'イメージがubuntu2004ltsであること' do
+      expect(disk_actual[:sourceImage]).to match disk_expected["image"]
+    end
+
+    it 'サイズが20GBであること' do
+      expect(disk_actual[:sizeGb]).to eq disk_expected["size"]
+    end
   end
 end
