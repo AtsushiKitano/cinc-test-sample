@@ -29,6 +29,10 @@ steps:
     name: 'cincproject/auditor'
     args: ["exec", './no_lib_test', '-t' , 'gcp://']
 
+  - id: "testing gcp by command"
+    name: 'cincproject/auditor'
+    args: ["exec", './shared_logic_sample']
+
   - id: "terraform destroy"
     name: 'alpine/terragrunt'
     args: ['terragrunt', 'run-all', 'destroy', '--terragrunt-non-interactive']

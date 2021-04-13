@@ -1,8 +1,10 @@
 # coding: utf-8
-network_expected_info = yaml(content: inspec.profile.file("network.yaml")).params
-gce_expected_info = yaml(content: inspec.profile.file("gce.yaml")).params
-project_id = ENV["TF_VAR_project"]
+# network_expected_info = yaml(content: inspec.profile.file("network.yaml")).params
+# gce_expected_info = yaml(content: inspec.profile.file("gce.yaml")).params
+network_expected_info = yaml("../configs/network.yaml")
+gce_expected_info = yaml("../configs/gce.yaml")
 
+project_id = ENV["TF_VAR_project"]
 
 control "network" do
   title "vpc,subnetwork,firewallの設定"

@@ -8,3 +8,7 @@ end
 describe "hello_world_shared" do
   it_behaves_like "hello_world_context", "hello_world.yaml" , "HelloWorld"
 end
+
+describe "command" do
+  it_behaves_like "hello_world_command", "sample", "ca-kitano-study-sandbox"
+end
