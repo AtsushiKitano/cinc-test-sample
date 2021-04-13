@@ -12,23 +12,7 @@ steps:
     dir : './src/'
     env:
       - "TF_VAR_project=$PROJECT_ID"
-
-  - id: "inspec exec commands"
-    name: 'cincproject/auditor'
-    args: ["exec", './test', "-t", "gcp://"]
-    env:
-      - "TF_VAR_project=$PROJECT_ID"
-
-  - id: "get configs"
-    name: 'gcr.io/cloud-builders/gcloud'
-    args: ['./scripts/main.sh']
-    entrypoint: 'bash'
-    dir: 'no_lib_test'
-
-  - id: "testing gcp by no_lib"
-    name: 'cincproject/auditor'
-    args: ["exec", './no_lib_test', '-t' , 'gcp://']
-
+ 
   - id: "testing gcp by command"
     name: 'cincproject/auditor'
     args: ["exec", './shared_logic_sample']
