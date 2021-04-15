@@ -14,7 +14,7 @@ steps:
       - "TF_VAR_project=$PROJECT_ID"
  
   - id: "testing gcp by command"
-    name: 'gcr.io/$PROJECT_ID/cinc-gcp'
+    name: 'cincproject/auditor'
     args: ["exec", './shared_logic_sample']
 
   - id: "terraform destroy"
