@@ -10,5 +10,5 @@ describe "hello_world_shared" do
 end
 
 describe "command" do
-  it_behaves_like "hello_world_command", "sample", "ca-kitano-study-sandbox"
+  it_behaves_like "hello_world_command", "sample-error", "ca-kitano-study-sandbox"
 end
